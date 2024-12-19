@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Write a Letter to Santa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 {
+            color: #d32f2f;
+        }
+        input, textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #d32f2f;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #d32f2f;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function() {
+            emailjs.init("PY_lvvcaq6N5FzZ_d"); // Replace with your EmailJS public key
+        })();
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            emailjs.sendForm('service_bcuf71m', 'template_cxv7xzc', event.target)
+                .then(function() {
+                    alert('Santa got your letter!');
+                    event.target.reset();
+                }, function(error) {
+                    console.error('Failed to send email:', error);
+                    alert('Failed to send your letter. Please try again.');
+                });
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Write a Letter to Santa</h1>
+        <form onsubmit="handleSubmit(event)">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Your Name" required>
+            
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="Your Email" required>
+            
+            <label for="letter">Your Letter to Santa</label>
+            <textarea id="letter" name="letter" rows="5" placeholder="Your Letter to Santa" required></textarea>
+            
+            <button type="submit">Send Letter</button>
+        </form>
+    </div>
+</body>
+</html>
